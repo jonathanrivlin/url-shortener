@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold mb-4">{% block title %} URL Shortener {% endblock %}</h1>
+     <form method="post">
+    <div class="input-group mb-3">
+        <input type="text" name="original"
+               placeholder="URL to shorten" class="form-control"
+               value="{{ request.form['url'] }}" autofocus>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </form>
+  </div>
+
+
+
+
+    {% if short_url %}
+    <hr>
+
+
+    <div class="input-group mb-3">
+      <input type="url" class="form-control" value="{{ short_url }}"  id="input" aria-label="short link" aria-describedby="button-addon2" readonly>
+      <button class="btn btn-outline-primary" id="copy" type="button" onclick="copy()">Copy Link</button>
+    </div>
+    <script>
+    function copy() {
+      var copyText = document.getElementById("input");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(copyText.value);
+      document.getElementById("copy").innerHTML = "Copied!";
+       document.getElementById("copy").className = "btn btn-success";
+}
+    </script>
+
+    {% endif %}
+{% endblock %}
