@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1 class="text-center fw-bold pb-3">Top 50 Websites</h1>
+<div class="table-responsive">
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Original URL</th>
+            <th>New URL</th>
+            <th>Created on</th>
+            <th>Created by</th>
+            <th>Hits</th>
+        </tr>
+    </thead>
+{% for url in urls %}
+    <tr>
+        <th>{{ url.original_url }}</th>
+        <th>{{ host_url + url.new_url }}</th>
+        <th>{{ url.created_on.strftime("%m/%d/%Y, %H:%M:%S") }}</th>
+        <th>{{ url.created_by }}</th>
+        <th>{{ url.hits }}</th>
+    </tr>
+{% endfor %}
+    </table>
+</div>
+{% endblock %}
